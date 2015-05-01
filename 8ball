@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+import colors as c
+import random
+import signal
+
+answers = [
+    'Yes.',
+    'No.',
+    'Maybe.',
+    'Definitely!',
+    'Never.'
+]
+
+alerts = [
+    'So, um, are you going to ask me a question?',
+    'Wellll...',
+    'Really does it take you that long to think about it?'
+    ]
+
+print(c.clear)
+
+print(c.red + '''
+Welcome to the magic eight ball.
+Enter your question below.
+''' + c.reset)
+
+def handle_alarm(sig,frame):
+    alert = random.choice(alerts)
+    print(c.bs)
+    print(c.red + alert + c.reset)
+    signal.alarm(random.randrange(5,30))
+
+def you_cant_kill_me(sig,frame):
+    print('Muahahaha, puny human. You cannot kill me!')
+
+signal.signal(signal.SIGALRM, handle_alarm)
+signal.signal(signal.SIGINT, you_cant_kill_me)
+
+while True:
+    signal.alarm(10)
+    question = input('> ' + c.green)
+    signal.alarm(0)
+    answer = random.choice(answers)
+    print(c.reset, end=' ')
+    print(c.red + answer + c.reset)
+
+
