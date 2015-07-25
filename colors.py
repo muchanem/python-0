@@ -2,6 +2,7 @@
 
 '''
 
+import random as r
 
 base01 = '\033[1;32m'
 base00 = '\033[1;33m'
@@ -20,10 +21,13 @@ green = '\033[0;32m'
 reset = '\033[0m'
 clear = '\033[H\033[2J'
 
-import random
+colors = [clear,base00, base01, base0, base1, base2, base3, yellow, orange, 
+red, magenta, violet, blue, cyan, green, reset]
 def random_color():
-    return random.choice([yellow, orange, red, magenta, violet, blue, cyan, green])
-
-    
-
+    color = r.choice(colors)
+    return color
+if __name__ == '__main__':
+    print(clear)
+    for color in colors:
+        print(color + 'Go Blockmc' + reset)
 
